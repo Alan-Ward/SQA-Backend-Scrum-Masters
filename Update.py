@@ -1,57 +1,89 @@
+import random
+from urllib.parse import uses_query
+
+
 class DailyUpdater:
 
-    def updateAccount(self, Acounts, Transactions):
-        current_acc_number = 0
+    def updateAccount(self, Accounts, Transactions):
         for transaction in Transactions:
-            if transaction['transaction_code'] == '00':
-                current_acc_number = self.login(Transactions)
-            elif transaction['transaction_code'] == '01':
-                self.withdrawal(current_acc_number, Acounts, Transactions)
+            if transaction['transaction_code'] == '01':
+                self.withdrawal(Accounts, transaction)
             elif transaction['transaction_code'] == '02':
-                self.transfer(current_acc_number, Acounts, Transactions)
+                self.transfer(Accounts, transaction)
             elif transaction['transaction_code'] == '03':
-                self.paybill()
+                self.paybill(Accounts, transaction)
             elif transaction['transaction_code'] == '04':
-                self.deposit()
+                self.deposit(Accounts, transaction)
             elif transaction['transaction_code'] == '05':
-                self.create()
+                self.create(Accounts, transaction)
             elif transaction['transaction_code'] == '06':
-                self.delete()
+                self.delete(Accounts, transaction)
             elif transaction['transaction_code'] == '07':
-                self.disable()
+                self.disable(Accounts, transaction)
             elif transaction['transaction_code'] == '08':
-                self.changeplan()
-            elif transaction['transaction_code'] == '09':
-                self.logout()
+                self.changeplan(Accounts, transaction)
+            elif transaction['transaction_code'] == '00':
+                pass
 
 
+    def withdrawal(self, Accounts, transaction):
+        for acc in Accounts:
+            if acc['account_number'] == transaction['account_number']:
+                acc['balance'] -= transaction['transaction_amount']
+                acc['balance'] -= self.calculate_fee(acc)
+            return 0
 
-    def login(self, Transactions):
-        return Transactions['account_number']
-
-    def withdrawal(self, current_acc_number, Acounts, Transactions):
+    def transfer(self, Accounts, transaction):
+        # TODO complete transfer method
         pass
 
-    def transfer(self, current_acc_number, Acounts, Transactions):
+    def paybill(self, Accounts, transaction):
+        for acc in Accounts:
+            if acc['account_number'] == transaction['account_number']:
+                acc['balance'] -= transaction['transaction_amount']
+                acc['balance'] -= self.calculate_fee(acc)
+            return 0
+
+    def deposit(self, Accounts, transaction):
+        for acc in Accounts:
+            if acc['account_number'] == transaction['account_number']:
+                acc['balance'] += transaction['transaction_amount']
+                acc['balance'] -= self.calculate_fee(acc)
+            return 0
+
+    def create(self,Accounts, transaction):
+        Accounts.append({
+            'account_number': self.generate_account_number(Accounts),
+            'name': transaction['name'],
+            'status': 'A',
+            'balance': transaction['transaction_amount'],
+            'total_transactions': 0
+        })
+
+    def delete(self, Accounts, transaction):
         pass
 
-    def paybill(self):
+    def disable(self, Accounts, transaction):
+        for acc in Accounts:
+            if acc['account_number'] == transaction['account_number']:
+                acc['status'] = 'D'
+                # if calling the function a second time activates it again, just add if statement
+            return 0
+
+    def changeplan(self, Accounts, transaction):
+        ## TODO this will need to be implemented. currently account files don't indicate which plan you have
         pass
 
-    def deposit(self):
-        pass
 
-    def create(self):
-        pass
+    def calculate_fee(self, acc):
+        if acc['account_plan'] == 'SP':
+            return 0.05
+        elif acc['account_plan'] == 'NP':
+            return 0.1
+        else:
+            return 0
 
-    def delete(self):
-        pass
-
-    def disable(self):
-        pass
-
-    def changeplan(self):
-        pass
-
-    def logout(self):
-        pass
+    def generate_account_number(self, Accounts):
+        # TODO needs to check if unique
+        unique = False
+        return random.randint(1,99999)
