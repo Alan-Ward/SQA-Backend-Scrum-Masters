@@ -1,12 +1,10 @@
 def read_transaction_file(file_path):
-    print("read_transactio_file works")
     ## Reads Transaction File
     ## And outputs array of transaction dictionaries
     ## IMPORTANT: I took out the miscellaneous characters from the code and test file so that it only works with 38 characters
 
     Transactions = []
     with open(file_path, 'r') as file:
-        print("open file works")
         for line_num, line in enumerate(file, 1):
             # Remove newline but preserve other characters
             clean_line = line.rstrip('\n')
@@ -48,13 +46,13 @@ def read_transaction_file(file_path):
 
                 # Convert numerical values
                 ## TODO test proper data type
-
+                transaction_amount = float(transaction_amount)
 
 
                 Transactions.append({
                     'transaction_code': transaction_code ,
                     'name': account_holder_name,
-                    'account_number': account_holder_number,
+                    'account_number': account_holder_number.lstrip('0') or '0',
                     'transaction_amount': transaction_amount,
                 })
 

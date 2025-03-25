@@ -22,16 +22,16 @@ class DailyUpdater:
                 self.disable(Accounts, transaction)
             elif transaction['transaction_code'] == '08':
                 self.changeplan(Accounts, transaction)
-            elif transaction['transaction_code'] == '00':
-                pass
+
 
 
     def withdrawal(self, Accounts, transaction):
         for acc in Accounts:
             if acc['account_number'] == transaction['account_number']:
+                # the numbers are rounded to 2 decimal places for accuracy
                 acc['balance'] -= transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
-            return 0
+        return 0
 
     def transfer(self, Accounts, transaction):
         # TODO complete transfer method
@@ -42,14 +42,15 @@ class DailyUpdater:
             if acc['account_number'] == transaction['account_number']:
                 acc['balance'] -= transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
-            return 0
+        return 0
 
     def deposit(self, Accounts, transaction):
         for acc in Accounts:
             if acc['account_number'] == transaction['account_number']:
                 acc['balance'] += transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
-            return 0
+
+        return 0
 
     def create(self,Accounts, transaction):
         Accounts.append({
@@ -57,7 +58,8 @@ class DailyUpdater:
             'name': transaction['name'],
             'status': 'A',
             'balance': transaction['transaction_amount'],
-            'total_transactions': 0
+            'total_transactions': 0,
+            'account_plan': 'NP'
         })
 
     def delete(self, Accounts, transaction):
@@ -68,7 +70,7 @@ class DailyUpdater:
             if acc['account_number'] == transaction['account_number']:
                 acc['status'] = 'D'
                 # if calling the function a second time activates it again, just add if statement
-            return 0
+        return 0
 
     def changeplan(self, Accounts, transaction):
         for acc in Accounts:
@@ -79,7 +81,7 @@ class DailyUpdater:
                     acc['account_plan'] = 'NP'
                 else:
                     print("Account plan format wrong") # we can take this out during testing
-            return 0
+        return 0
 
 
     def calculate_fee(self, acc):
