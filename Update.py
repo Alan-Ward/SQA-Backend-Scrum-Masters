@@ -1,11 +1,11 @@
 import random
-from urllib.parse import uses_query
 
 
 class DailyUpdater:
 
     def updateAccount(self, Accounts, Transactions):
         for transaction in Transactions:
+            # responds to transaction code with appropriate function call
             if transaction['transaction_code'] == '01':
                 self.withdrawal(Accounts, transaction)
             elif transaction['transaction_code'] == '02':
@@ -71,8 +71,15 @@ class DailyUpdater:
             return 0
 
     def changeplan(self, Accounts, transaction):
-        ## TODO this will need to be implemented. currently account files don't indicate which plan you have
-        pass
+        for acc in Accounts:
+            if acc['account_number'] == transaction['account_number']:
+                if acc['account_plan'] == 'NP':
+                    acc['account_plan'] = 'SP'
+                elif acc['account_plan'] == 'SP':
+                    acc['account_plan'] = 'NP'
+                else:
+                    print("Account plan format wrong") # we can take this out during testing
+            return 0
 
 
     def calculate_fee(self, acc):
