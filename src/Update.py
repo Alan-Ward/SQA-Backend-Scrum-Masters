@@ -1,5 +1,5 @@
 import random
-import print_error
+from . import print_error
 
 class DailyUpdater:
 

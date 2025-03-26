@@ -1,6 +1,6 @@
-from BankBackend import Backend
+from src.BankBackend import BackEnd
 def main():
-    backend = Backend()
+    backend = BackEnd()
     try:
         backend.run()
     except EOFError:
