@@ -7,11 +7,19 @@ class BackEnd:
 		self.file_handler = FileHandler()
 		self.daily_updater = DailyUpdater()  
 	def run(self):
-		self.master_accounts = self.file_handler.readMasterBankAccountsFile()
+		self.accounts = self.file_handler.readMasterBankAccountsFile()
 		self.transactions = self.file_handler.readTransactionFile()
+		self.file_handler.testAccounts(self.accounts)
+		#self.file_handler.testTransactions(self.transactions)
 		self.daily_updater.updateAccount(self.accounts,self.transactions)
 		self.file_handler.update_master_bank_accounts_file(self.accounts)
 		self.file_handler.writeCurrentBankAccountsFile(self.accounts)
+		"""
+		self.accounts = self.file_handler.readMasterBankAccountsFile()
+		self.transactions = self.file_handler.readTransactionFile()
+		self.file_handler.testAccounts(self.accounts)
+		self.file_handler.testTransactions(self.transactions)
+		"""
 		
 
 

@@ -2,7 +2,6 @@ def read_transaction_file(file_path):
     ## Reads Transaction File
     ## And outputs array of transaction dictionaries
     ## IMPORTANT: I took out the miscellaneous characters from the code and test file so that it only works with 38 characters
-    print("please")
     Transactions = []
     with open(file_path, 'r') as file:
         for line_num, line in enumerate(file, 1):
