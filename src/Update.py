@@ -140,7 +140,7 @@ class DailyUpdater:
     def generate_account_number(self, Accounts):
         while(True):
             new_account_number = random.randint(1,99999)
-            if check_unique_account(Accounts,new_account_number):
+            if self.check_unique_account(Accounts,new_account_number):
                 break
         return new_account_number
 

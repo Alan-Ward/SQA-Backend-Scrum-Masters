@@ -4,12 +4,14 @@ class BackEnd:
 	def __init__(self):
 		self.accounts = []
 		self.transactions = []
+		self.file_handler = FileHandler()
+		self.daily_updater = DailyUpdater()  
 	def run(self):
-		self.master_accounts = FileHandler.readMasterBankAccountsFile()
-		self.transactions = FileHandler.readTransactionFile()
-		DailyUpdater.updateAccount(self.accounts,self.transactions)
-		FileHandler.update_master_bank_accounts_file(self.accounts)
-		FileHandler.writeCurrentBankAccountsFile(self.accounts)
+		self.master_accounts = self.file_handler.readMasterBankAccountsFile()
+		self.transactions = self.file_handler.readTransactionFile()
+		self.daily_updater.updateAccount(self.accounts,self.transactions)
+		self.file_handler.update_master_bank_accounts_file(self.accounts)
+		self.file_handler.writeCurrentBankAccountsFile(self.accounts)
 		
 
 
