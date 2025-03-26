@@ -1,5 +1,5 @@
 import random
-
+import print_error
 
 class DailyUpdater:
 
@@ -32,6 +32,7 @@ class DailyUpdater:
                 # the numbers are rounded to 2 decimal places for accuracy
                 acc['balance'] -= transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
+                check_balance(acc['balance'])
         return 0
 
     # ---------------------------------------------------------------------
@@ -47,12 +48,14 @@ class DailyUpdater:
                     print("previous")
                     previous_acc['balance'] -= previous_transaction['transaction_amount']
                     previous_acc['balance'] -= self.calculate_fee(previous_acc)
+                    check_balance(acc['balance'])
 
             for acc in Accounts:
                 if acc['account_number'] == transaction['account_number']:
                     print("current")
                     acc['balance'] += transaction['transaction_amount']
                     acc['balance'] -= self.calculate_fee(acc)
+                    check_balance(acc['balance'])
         return 0
 
     # ---------------------------------------------------------------------
@@ -61,6 +64,7 @@ class DailyUpdater:
             if acc['account_number'] == transaction['account_number']:
                 acc['balance'] -= transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
+                check_balance(acc['balance'])
         return 0
 
     # ---------------------------------------------------------------------
@@ -96,6 +100,7 @@ class DailyUpdater:
             if acc['account_number'] == transaction['account_number']:
                 acc['status'] = 'D'
                 acc['balance'] -= self.calculate_fee(acc)
+                check_balance(acc['balance'])
                 # if calling the function a second time activates it again, just add if statement
         return 0
 
@@ -106,9 +111,11 @@ class DailyUpdater:
                 if acc['account_plan'] == 'NP':
                     acc['account_plan'] = 'SP'
                     acc['balance'] -= self.calculate_fee(acc)
+                    check_balance(acc['balance'])
                 elif acc['account_plan'] == 'SP':
                     acc['account_plan'] = 'NP'
                     acc['balance'] -= self.calculate_fee(acc)
+                    check_balance(acc['balance'])
                 else:
                     print("Account plan format wrong") # we can take this out during testing
         return 0
@@ -124,6 +131,20 @@ class DailyUpdater:
 
     # ---------------------------------------------------------------------
     def generate_account_number(self, Accounts):
-        # TODO needs to check if unique
-        unique = False
-        return random.randint(1,99999)
+        while(True):
+            new_account_number = random.randint(1,99999)
+            if check_unique_account(Accounts,new_account_number):
+                break
+        return new_account_number
+
+    def check_balance(self,balance):
+        if balance < 0 :
+            constraint_type = 'Account Balance'
+            desc = "Account Balance has Fallen Below Zero"
+            print_error(constraint_type, desc)
+    def check_unique_account(self, Accounts, new_account_number):
+        for account in Accounts:
+            if account["account_number"] == new_account_number:
+                return False
+        return True
+
