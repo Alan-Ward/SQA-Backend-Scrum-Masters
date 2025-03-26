@@ -75,7 +75,7 @@ class DailyUpdater:
     # ---------------------------------------------------------------------
     def create(self,Accounts, transaction):
         Accounts.append({
-            'account_number': self.generate_account_number(Accounts),
+            'account_number': str(self.generate_account_number(Accounts)),
             'name': transaction['name'].strip(),
             'status': 'A',
             'balance': transaction['transaction_amount'],
