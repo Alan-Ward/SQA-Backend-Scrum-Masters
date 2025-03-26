@@ -5,6 +5,5 @@ def main():
         backend.run()
     except EOFError:
         pass
-
 if __name__ == "__main__":
     main()
