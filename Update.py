@@ -33,6 +33,7 @@ class DailyUpdater:
                 acc['balance'] -= transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
                 check_balance(acc['balance'])
+                acc["total_transactions"] +=1
         return 0
 
     # ---------------------------------------------------------------------
@@ -49,6 +50,7 @@ class DailyUpdater:
                     previous_acc['balance'] -= previous_transaction['transaction_amount']
                     previous_acc['balance'] -= self.calculate_fee(previous_acc)
                     check_balance(acc['balance'])
+                    acc["total_transactions"] +=1
 
             for acc in Accounts:
                 if acc['account_number'] == transaction['account_number']:
@@ -56,6 +58,7 @@ class DailyUpdater:
                     acc['balance'] += transaction['transaction_amount']
                     acc['balance'] -= self.calculate_fee(acc)
                     check_balance(acc['balance'])
+                    acc["total_transactions"] +=1
         return 0
 
     # ---------------------------------------------------------------------
@@ -65,6 +68,7 @@ class DailyUpdater:
                 acc['balance'] -= transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
                 check_balance(acc['balance'])
+                acc["total_transactions"] +=1
         return 0
 
     # ---------------------------------------------------------------------
@@ -73,7 +77,7 @@ class DailyUpdater:
             if acc['account_number'] == transaction['account_number']:
                 acc['balance'] += transaction['transaction_amount']
                 acc['balance'] -= self.calculate_fee(acc)
-
+                acc["total_transactions"] +=1
         return 0
 
     # ---------------------------------------------------------------------
@@ -101,6 +105,7 @@ class DailyUpdater:
                 acc['status'] = 'D'
                 acc['balance'] -= self.calculate_fee(acc)
                 check_balance(acc['balance'])
+                acc["total_transactions"] +=1
                 # if calling the function a second time activates it again, just add if statement
         return 0
 
@@ -112,10 +117,12 @@ class DailyUpdater:
                     acc['account_plan'] = 'SP'
                     acc['balance'] -= self.calculate_fee(acc)
                     check_balance(acc['balance'])
+                    acc["total_transactions"] +=1
                 elif acc['account_plan'] == 'SP':
                     acc['account_plan'] = 'NP'
                     acc['balance'] -= self.calculate_fee(acc)
                     check_balance(acc['balance'])
+                    acc["total_transactions"] +=1
                 else:
                     print("Account plan format wrong") # we can take this out during testing
         return 0
