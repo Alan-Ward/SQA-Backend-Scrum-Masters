@@ -30,8 +30,8 @@ def update_master_bank_accounts(accounts, file_path):
                 raise ValueError(f"Total transaction out of range: {acc['total_transactions']}")
 
             # Validate account plan
-            if acc['account_plan'] not in ('SP' ,'NP'):
-                raise ValueError(f"Account plan wrong format: {acc['account_plan']}")
+            if acc['plan'] not in ('SP' ,'NP'):
+                raise ValueError(f"Account plan wrong format: {acc['plan']}")
 
             # Format fields
             acc_num = acc['account_number'].zfill(5)
@@ -39,6 +39,6 @@ def update_master_bank_accounts(accounts, file_path):
             balance = f"{acc['balance']:08.2f}"
             total_transaction = f"{acc['total_transactions']:04}"
 
-            file.write(f"{acc_num} {name} {acc['status']} {balance} {total_transaction} {acc['account_plan']}\n")
+            file.write(f"{acc_num} {name} {acc['status']} {balance} {total_transaction} {acc['plan']}\n")
 
         # Add END_OF_FILE marker

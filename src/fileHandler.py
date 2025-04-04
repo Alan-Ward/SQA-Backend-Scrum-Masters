@@ -41,7 +41,7 @@ class FileHandler:
     # prints contents of Accounts array
     def testAccounts(self, Accounts):
         for acc in Accounts:
-            print(acc['account_number'], acc['name'], acc['status'], acc['balance'], acc['total_transactions'],acc['account_plan'])
+            print(acc['account_number'], acc['name'], acc['status'], acc['balance'], acc['total_transactions'],acc['plan'])
 
     # prints contents of Transactions array
     def testTransactions(self, Transactions):

@@ -88,7 +88,7 @@ class DailyUpdater:
             'status': 'A',
             'balance': transaction['transaction_amount'],
             'total_transactions': 0,
-            'account_plan': 'NP'
+            'plan': 'NP'
         })
 
     # ---------------------------------------------------------------------
@@ -113,13 +113,13 @@ class DailyUpdater:
     def changeplan(self, Accounts, transaction):
         for acc in Accounts:
             if acc['account_number'] == transaction['account_number']:
-                if acc['account_plan'] == 'NP':
-                    acc['account_plan'] = 'SP'
+                if acc['plan'] == 'NP':
+                    acc['plan'] = 'SP'
                     acc['balance'] -= self.calculate_fee(acc)
                     check_balance(acc['balance'])
                     acc["total_transactions"] +=1
-                elif acc['account_plan'] == 'SP':
-                    acc['account_plan'] = 'NP'
+                elif acc['plan'] == 'SP':
+                    acc['plan'] = 'NP'
                     acc['balance'] -= self.calculate_fee(acc)
                     check_balance(acc['balance'])
                     acc["total_transactions"] +=1
@@ -129,9 +129,9 @@ class DailyUpdater:
 
     # ---------------------------------------------------------------------
     def calculate_fee(self, acc):
-        if acc['account_plan'] == 'SP':
+        if acc['plan'] == 'SP':
             return 0.05
-        elif acc['account_plan'] == 'NP':
+        elif acc['plan'] == 'NP':
             return 0.1
         else:
             return 0
