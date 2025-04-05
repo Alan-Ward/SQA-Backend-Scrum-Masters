@@ -19,7 +19,7 @@ class TestFileHandler(unittest.TestCase):
         result_path = self.file_handler.findPath(filename)
         self.assertEqual(result_path, expected_path)
 
-    @patch('your_module.readTransaction.read_transaction_file')
+    @patch('src.readTransaction.read_transaction_file')
     def test_readTransactionFile_success(self, mock_read_transaction):
         """Test successful reading of transaction file."""
         mock_read_transaction.return_value = [{"transaction_code": "01", "name": "John Doe", "account_number": "12345", "transaction_amount": 100.00}]
@@ -27,14 +27,14 @@ class TestFileHandler(unittest.TestCase):
         self.assertEqual(len(transactions), 1)
         self.assertEqual(transactions[0]["account_number"], "12345")
 
-    @patch('your_module.readTransaction.read_transaction_file')
+    @patch('src.readTransaction.read_transaction_file')
     def test_readTransactionFile_file_not_found(self, mock_read_transaction):
         """Test handling of missing transaction file."""
         mock_read_transaction.side_effect = FileNotFoundError("File not found")
         with self.assertRaises(FileNotFoundError):
             self.file_handler.readTransactionFile()
 
-    @patch('your_module.read.read_old_bank_accounts')
+    @patch('src.read.read_old_bank_accounts')
     def test_readMasterBankAccountsFile_success(self, mock_read_accounts):
         """Test successful reading of master bank accounts."""
         mock_read_accounts.return_value = [{"account_number": "12345", "name": "John Doe", "balance": 500.00}]
@@ -42,14 +42,14 @@ class TestFileHandler(unittest.TestCase):
         self.assertEqual(len(accounts), 1)
         self.assertEqual(accounts[0]["name"], "John Doe")
 
-    @patch('your_module.write.write_new_current_accounts')
+    @patch('src.write.write_new_current_accounts')
     def test_writeCurrentBankAccountsFile_success(self, mock_write_accounts):
         """Test successful writing of current bank accounts."""
         test_accounts = [{"account_number": "12345", "name": "John Doe", "balance": 500.00}]
         self.file_handler.writeCurrentBankAccountsFile(test_accounts)
         mock_write_accounts.assert_called_once_with(test_accounts, self.file_handler.findPath('New_Current_Bank_Accounts_File'))
 
-    @patch('your_module.updateMasterBankAccount.update_master_bank_accounts')
+    @patch('src.updateMasterBankAccount.update_master_bank_accounts')
     def test_update_master_bank_accounts_file_success(self, mock_update_master):
         """Test successful update of master bank accounts."""
         test_accounts = [{"account_number": "12345", "name": "John Doe", "balance": 500.00}]

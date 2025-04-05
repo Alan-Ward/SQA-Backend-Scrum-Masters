@@ -21,7 +21,8 @@ def read_transaction_file(file_path):
                 transaction_amount = clean_line[30:38]  # 8 characters
 
                 # Validate transaction code format (2 digits)
-                if not transaction_code.isdigit():
+                if (not transaction_code.isdigit()
+                    or int(transaction_code)>8):
                     print(f"ERROR: Fatal error - Line {line_num}: Invalid transaction code format")
                     continue
 
