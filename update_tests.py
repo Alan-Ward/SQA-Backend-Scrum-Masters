@@ -14,7 +14,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
     def tearDown(self):
         os.remove(self.test_file_path)
 
-    def test_TC1_ValidAccount(self):
+    def test01_ValidAccount(self):
         accounts = [{
             'account_number': '12345',
             'name': 'Alice',
@@ -28,7 +28,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
         except Exception:
             self.fail("Valid account raised an exception.")
 
-    def test_TC2_InvalidAccNum(self):
+    def test02_InvalidAccNum(self):
         accounts = [{
             'account_number': 12345,  # Should be str
             'name': 'Alice',
@@ -40,7 +40,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
         with self.assertRaises(ValueError):
             update_master_bank_accounts(accounts, self.test_file_path)
 
-    def test_TC3_TooLongAccNum(self):
+    def test03_TooLongAccNum(self):
         accounts = [{
             'account_number': '1234567',  # > 5 digits
             'name': 'Alice',
@@ -52,7 +52,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
         with self.assertRaises(ValueError):
             update_master_bank_accounts(accounts, self.test_file_path)
 
-    def test_TC4_LongName(self):
+    def test04_LongName(self):
         accounts = [{
             'account_number': '12345',
             'name': 'A' * 21,  # > 20 chars
@@ -64,7 +64,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
         with self.assertRaises(ValueError):
             update_master_bank_accounts(accounts, self.test_file_path)
 
-    def test_TC5_InvalidStatus(self):
+    def test05_InvalidStatus(self):
         accounts = [{
             'account_number': '12345',
             'name': 'Alice',
@@ -76,7 +76,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
         with self.assertRaises(ValueError):
             update_master_bank_accounts(accounts, self.test_file_path)
 
-    def test_TC6_BadBalance(self):
+    def test06_BadBalance(self):
         accounts = [{
             'account_number': '12345',
             'name': 'Alice',
@@ -88,7 +88,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
         with self.assertRaises(ValueError):
             update_master_bank_accounts(accounts, self.test_file_path)
 
-    def test_TC7_TooManyTx(self):
+    def test07_TooManyTx(self):
         accounts = [{
             'account_number': '12345',
             'name': 'Alice',
@@ -100,7 +100,7 @@ class TestUpdateMasterBankAccounts(unittest.TestCase):
         with self.assertRaises(ValueError):
             update_master_bank_accounts(accounts, self.test_file_path)
 
-    def test_TC8_InvalidPlan(self):
+    def test08_InvalidPlan(self):
         accounts = [{
             'account_number': '12345',
             'name': 'Alice',

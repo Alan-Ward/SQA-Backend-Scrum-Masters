@@ -9,7 +9,7 @@ class TestBackEnd(unittest.TestCase):
         self.backend.file_handler = MagicMock()
         self.backend.daily_updater = MagicMock()
 
-    def test_TC1_empty_data(self):
+    def test01_empty_data(self):
         """Test with empty account and transaction lists."""
         self.backend.file_handler.readMasterBankAccountsFile.return_value = []
         self.backend.file_handler.readTransactionFile.return_value = []
@@ -22,7 +22,7 @@ class TestBackEnd(unittest.TestCase):
         self.backend.file_handler.update_master_bank_accounts_file.assert_called_once()
         self.backend.file_handler.writeCurrentBankAccountsFile.assert_called_once()
 
-    def test_TC2_valid_data(self):
+    def test02_valid_data(self):
         """Test with normal valid data."""
         accounts = [{'account_number': '12345'}]
         transactions = [{'type': 'DEP', 'amount': 100}]
@@ -33,7 +33,7 @@ class TestBackEnd(unittest.TestCase):
 
         self.backend.daily_updater.updateAccount.assert_called_once_with(accounts, transactions)
 
-    def test_TC3_testAccounts_fails(self):
+    def test03_invalid_accounts(self):
         """Simulate testAccounts raising an error."""
         self.backend.file_handler.readMasterBankAccountsFile.return_value = [{'account_number': '12345'}]
         self.backend.file_handler.readTransactionFile.return_value = []
@@ -45,7 +45,7 @@ class TestBackEnd(unittest.TestCase):
 
         self.assertEqual(str(context.exception), "Invalid accounts")
 
-    def test_TC4_testTransactions_fails(self):
+    def test04_invalid_transactions(self):
         """Simulate testTransactions raising an error."""
         self.backend.file_handler.readMasterBankAccountsFile.return_value = [{'account_number': '12345'}]
         self.backend.file_handler.readTransactionFile.return_value = [{'type': 'DEP'}]
@@ -57,7 +57,7 @@ class TestBackEnd(unittest.TestCase):
 
         self.assertEqual(str(context.exception), "Invalid transaction")
 
-    def test_TC5_loop_coverage_multiple_transactions(self):
+    def test05_loop_coverage_multiple_transactions(self):
         """Loop coverage: multiple transactions processed."""
         accounts = [{'account_number': '11111'}]
         transactions = [{'type': 'DEP'}, {'type': 'WDR'}, {'type': 'XFR'}]
