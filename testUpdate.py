@@ -72,5 +72,50 @@ class TestDailyUpdater(unittest.TestCase):
         self.assertEqual(sender['total_transactions'], 1)
         self.assertEqual(receiver['total_transactions'], 1)
 
+    def test_paybill(self):
+        transaction = {
+            'account_number': '12345',
+            'transaction_amount': 10.0
+        }
+        accounts = [self.account.copy()]
+        self.updater.paybill(accounts, transaction)
+
+        acc = accounts[0]
+        self.assertAlmostEqual(acc['balance'], 100.0 - 10.0 - 0.1)
+        self.assertEqual(acc['total_transactions'], 1)
+
+    def test_deposit(self):
+        transaction = {
+            'account_number': '12345',
+            'transaction_amount': 50.0
+        }
+        accounts = [self.account.copy()]
+        self.updater.deposit(accounts, transaction)
+
+        acc = accounts[0]
+        self.assertEqual(acc['balance'], 149.9)
+        self.assertEqual(acc['total_transactions'], 1)
+
+    def test_delete(self):
+        accounts = [self.account.copy()]
+        self.updater.delete(accounts, {'account_number': '12345'})
+        self.assertEqual(len(accounts), 0)
+
+    def test_disable(self):
+        accounts = [self.account.copy()]
+        self.updater.disable(accounts, {'account_number': '12345'})
+
+        self.assertEqual(accounts[0]['status'], 'D')
+
+    def test_changeplan(self):
+        accounts = [self.account.copy()]
+        self.updater.changeplan(accounts, {'account_number': '12345'})
+
+        # Should toggle between 'NP' and 'SP'
+        self.assertEqual(accounts[0]['plan'], 'SP')
+
+        self.updater.changeplan(accounts, {'account_number': '12345'})
+        self.assertEqual(accounts[0]['plan'], 'NP')
+
 if __name__ == '__main__':
     unittest.main()
