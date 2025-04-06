@@ -24,7 +24,7 @@ class TestWriteNewCurrentAccounts(unittest.TestCase):
             'plan': 'SP'
         }]
         lines = self.read_from_temp(accounts)
-        self.assertIn("00001 John Doe           A 00234.56 SP\n", lines)
+        self.assertIn("00001 John Doe             A 00234.56 SP\n", lines)
         self.assertTrue(lines[-1].startswith("00000 END_OF_FILE"))
 
     def test_invalid_account_number_raises(self):
