@@ -9,7 +9,7 @@ def read_transaction_file(file_path):
             clean_line = line.rstrip('\n')
 
             # Validate line length
-            if len(clean_line) != 38:
+            if len(clean_line) != 41:
                 print(f"ERROR: Fatal error - Line {line_num}: Invalid length ({len(clean_line)} chars)")
                 continue
 
