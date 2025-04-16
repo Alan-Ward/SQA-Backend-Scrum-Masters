@@ -1,0 +1,6 @@
+login
+standard
+John Smith
+deposit
+100.00
+logout

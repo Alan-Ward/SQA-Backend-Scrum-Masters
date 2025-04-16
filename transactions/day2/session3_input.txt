@@ -1,0 +1,6 @@
+login
+standard
+John Smith
+withdrawal
+50.00
+logout

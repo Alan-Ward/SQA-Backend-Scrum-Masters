@@ -1,0 +1,15 @@
+login
+admin
+create
+Bob Brown
+800.00
+logout
+login
+standard
+John Smith
+transfer
+00001
+00003
+200.00
+y
+logout

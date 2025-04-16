@@ -1,0 +1,6 @@
+login
+admin
+delete
+Alice Green
+00002
+logout

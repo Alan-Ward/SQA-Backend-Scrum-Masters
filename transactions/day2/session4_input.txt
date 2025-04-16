@@ -1,0 +1,8 @@
+login
+standard
+John Smith
+paybill
+EC
+200.00
+y
+logout

@@ -1,0 +1,6 @@
+login
+admin
+create
+Alice Green
+1200.00
+logout
