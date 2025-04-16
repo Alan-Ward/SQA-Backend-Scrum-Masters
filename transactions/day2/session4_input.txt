@@ -1,8 +1,13 @@
 login
 standard
+<<<<<<< HEAD
 Billy
 paybill
 00002
+=======
+John Smith
+paybill
+>>>>>>> 07995c9f1cb36b255b6b1d1d6c899da41816545f
 EC
 200.00
 y

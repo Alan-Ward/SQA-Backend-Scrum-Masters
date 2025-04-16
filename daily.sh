@@ -17,7 +17,11 @@ for day_dir in $TRANSACTION_DIR/day*; do
     for session_file in "$day_dir"/session*_input.txt; do
         [ -e "$session_file" ] || continue  # skip if no matching file
         session_name=$(basename "$session_file" .txt)
+<<<<<<< HEAD
         output_file="./transactions/day7/transactions.txt"
+=======
+        output_file="$day_dir/${session_name}_transactions.txt"
+>>>>>>> 07995c9f1cb36b255b6b1d1d6c899da41816545f
         
         echo "Running session file: $session_file"
         python3 $FRONTEND_SCRIPT < "$session_file"

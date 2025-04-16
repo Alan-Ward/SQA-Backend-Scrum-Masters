@@ -1,7 +1,12 @@
 login
 standard
+<<<<<<< HEAD
 Andrew
 deposit
 65432
+=======
+John Smith
+deposit
+>>>>>>> 07995c9f1cb36b255b6b1d1d6c899da41816545f
 100.00
 logout

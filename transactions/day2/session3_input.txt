@@ -1,7 +1,12 @@
 login
 standard
+<<<<<<< HEAD
 Bob
 withdrawal
 67890
+=======
+John Smith
+withdrawal
+>>>>>>> 07995c9f1cb36b255b6b1d1d6c899da41816545f
 50.00
 logout
