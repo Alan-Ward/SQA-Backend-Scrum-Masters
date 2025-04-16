@@ -11,6 +11,8 @@ from .delete import Delete
 from .disable import Disable
 from .changeplan import Changeplan
 from .bankerror import BankError
+import os
+
 
 # The front-end class that interacts with the user
 class BankUI:
@@ -46,7 +48,7 @@ class BankUI:
 
         if not self.loaded:
             try:
-                with open("./bank_account.txt", "r") as file:
+                with open("bank_account.txt", "r") as file:
                     bank_account = file.readlines()
 
                 for line in bank_account:
@@ -83,6 +85,7 @@ class BankUI:
 
                 self.loaded = True
             except FileNotFoundError:
+                print(os.getcwd())
                 print("Error: Bank account file not found")
                 return False
             except (ValueError, IndexError):

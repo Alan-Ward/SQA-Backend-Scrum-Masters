@@ -25,7 +25,7 @@ class FileHandler:
 
     # loads accounts into an array of dictionaries
     def readMasterBankAccountsFile(self):
-        file_path = self.findPath('Master_Bank_Accounts_File')
+        file_path = self.findPath('Master_Bank_Accounts_File.txt')
         return read.read_old_bank_accounts(file_path)
 
     # writes updated Accounts to New_Current_Bank_Accounts_File
@@ -35,7 +35,7 @@ class FileHandler:
 
     # writes updates Master_Bank_Accounts_File with account info
     def update_master_bank_accounts_file(self, Accounts):
-        file_path = self.findPath('Master_Bank_Accounts_File')
+        file_path = self.findPath('Master_Bank_Accounts_File.txt')
         updateMasterBankAccount.update_master_bank_accounts(Accounts, file_path)
 
     # prints contents of Accounts array

@@ -1,0 +1,9 @@
+login
+standard
+Billy
+paybill
+00002
+EC
+200.00
+y
+logout

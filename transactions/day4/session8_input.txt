@@ -1,0 +1,6 @@
+login
+standard
+Alice Green
+withdrawal
+300.00
+logout

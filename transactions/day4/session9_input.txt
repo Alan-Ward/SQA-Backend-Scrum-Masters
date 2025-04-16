@@ -1,0 +1,8 @@
+login
+standard
+Alice Green
+paybill
+CQ
+150.00
+y
+logout

@@ -1,6 +1,6 @@
 def update_master_bank_accounts(accounts, file_path):
     # this clears any currently existing data
-    open(file_path, "w").close()
+    #open(file_path, "w").close()
 
     with open(file_path, 'w') as file:
 
