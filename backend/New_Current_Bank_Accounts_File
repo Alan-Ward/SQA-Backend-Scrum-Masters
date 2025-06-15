@@ -1,16 +1,25 @@
-00000 Andrew               A 00300.00 NP
-00000 Andrew               A 07000.00 SP
-00000 Bob                  A 55555.00 SP
-00000 Billy                D 07823.54 NP
-00000 Billy                A 02345.89 NP
-00000 Firstname Lastname   A 99999.99 NP
-00000 Steve Steve          D 00000.00 NP
-00000 Broke Boy            A 00450.00 SP
-00000 END_OF_FILE          A 00000.00 NP
-43090 John Smith           A 01000.00 NP
-54028 Alice Green          A 01200.00 NP
-18479 Alice Green          A 01200.00 NP
-54959 Alice Green          A 01200.00 NP
-52110 Alice Green          A 01200.00 NP
-78466 Bob Brown            A 00800.00 NP
+00083 John Smith           A 01000.00 NP
+00016 Alice Green          A 01200.00 NP
+00064 Alice Green          A 01200.00 NP
+00085 Alice Green          A 01200.00 NP
+00018 Alice Green          A 01200.00 NP
+00051 Bob Brown            A 00800.00 NP
+00308 John Smith           A 01000.00 NP
+00999 Alice Green          A 01200.00 NP
+00419 Alice Green          A 01200.00 NP
+00882 Alice Green          A 01200.00 NP
+00136 Alice Green          A 01200.00 NP
+00586 Bob Brown            A 00800.00 NP
+03430 John Smith           A 01000.00 NP
+05101 Alice Green          A 01200.00 NP
+00408 Alice Green          A 01200.00 NP
+00065 Alice Green          A 01200.00 NP
+08681 Alice Green          A 01200.00 NP
+06076 Bob Brown            A 00800.00 NP
+45023 John Smith           A 01000.00 NP
+33411 Alice Green          A 01200.00 NP
+18851 Alice Green          A 01200.00 NP
+60975 Alice Green          A 01200.00 NP
+00266 Alice Green          A 01200.00 NP
+11106 Bob Brown            A 00800.00 NP
 00000 END_OF_FILE          A 00000.00 NP
